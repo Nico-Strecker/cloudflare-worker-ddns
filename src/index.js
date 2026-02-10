@@ -286,6 +286,11 @@ export default {
         for (const recordIp of recordIps) {
           const recordType = recordIp.includes(":") ? "AAAA" : "A";
 
+          // Ignore ipv6 (not supported by firewall)
+          if(recordType === "AAAA"){
+            continue;
+          }
+
           let recordId;
           try {
             console.debug(`Fetching record: ${recordName} (${recordType})`);
